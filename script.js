@@ -49,10 +49,10 @@ function currentWeather(city){
         //parse the response for name of city and concanatig the date and icon.
         $(currentCity).html(response.name +"("+date+")" + "<img src="+iconurl+">");
         // parse the response to display the current temperature.
-        // Convert the temp to fahrenheit
+        // Convert the temp to celsius
 
-        var tempF = (response.main.temp - 273.15) * 1.80 + 32;
-        $(currentTemperature).html((tempF).toFixed(2)+"&#8457");
+        var tempF = (response.main.temp - 273.15);
+        $(currentTemperature).html((tempF).toFixed(2)+"&#8451");
         // Display the Humidity
         $(currentHumidty).html(response.main.humidity+"%");
         //Display Wind speed and convert to MPH
@@ -110,12 +110,12 @@ function forecast(cityid){
             var iconcode= response.list[((i+1)*8)-1].weather[0].icon;
             var iconurl="https://openweathermap.org/img/wn/"+iconcode+".png";
             var tempK= response.list[((i+1)*8)-1].main.temp;
-            var tempF=(((tempK-273.5)*1.80)+32).toFixed(2);
+            var tempF = (tempK - 273.15).toFixed(2); //(((tempK-273.5)*1.80)+32).toFixed(2);
             var humidity= response.list[((i+1)*8)-1].main.humidity;
         
             $("#fDate"+i).html(date);
             $("#fImg"+i).html("<img src="+iconurl+">");
-            $("#fTemp"+i).html(tempF+"&#8457");
+            $("#fTemp"+i).html(tempF+"&#8451");
             $("#fHumidity"+i).html(humidity+"%");
         }
         
